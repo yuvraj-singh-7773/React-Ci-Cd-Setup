@@ -20,10 +20,11 @@ jobs:
       - name: "setup vercel cli"
         run: npm install -g vercel
       
-      - name: "download build artifacts"
+      - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
           name: build
+          path: dist
           run-id: ${{ github.event.workflow_run.id }}
           github-token: ${{ github.token }}
       
