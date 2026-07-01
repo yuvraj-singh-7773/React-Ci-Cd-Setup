@@ -1,12 +1,14 @@
 name: "CD pipeline/workflow"
 on:
   workflow_run:
-    workflows: ["Sample React CI Pipeline / Workflow"]
+    workflows:
+      - "Sample ci pipeline/workflow"
     types:
       - completed
   workflow_dispatch:
 jobs:
   deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     environment: production
     steps:
@@ -26,4 +28,4 @@ jobs:
           github-token: ${{ github.token }}
       
       - name: "Deploy to vercel"
-        run: vercel --prod --token=${{ secrets.VERSEL_SECRET }} --confirm --name=
+        run: vercel --prod --token=${{ secrets.VERSEL_SECRET }} --confirm --name=ci-cd-react --cwd=./dist
