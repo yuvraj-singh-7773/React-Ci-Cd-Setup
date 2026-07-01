@@ -1,0 +1,38 @@
+name: "Sample ci pipeline/workflow"
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Clone the repo." #use to copy your repository to the runner machine on github
+        uses: actions/checkout@v4
+
+      - name: "Set up Node.js"
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      
+      - name: "node version"
+        run: node --version
+
+      - name: "Install dependencies"
+        run: npm install
+
+      - name: "Run tests"
+        run: npm test
+
+      - name: "Build the project"
+        run: npm run build
+      
+      - name: "Upload build artifacts"
+        uses: actions/upload-artifact@v4
+        with:
+          name: build
+          path: ./dist
+      
+
