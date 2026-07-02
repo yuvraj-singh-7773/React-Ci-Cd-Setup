@@ -11,13 +11,18 @@ jobs:
   deploy:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
-    environment: production
+    environment: 
 
     steps:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "22"
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
 
       - name: Install Vercel CLI
         run: npm install -g vercel
@@ -44,3 +49,12 @@ jobs:
             --yes \
             --token=${{ secrets.VERSEL_SECRET }} \
             --name react-ci-cd-setup
+      
+      - name: Send failure email
+        if: failure()
+        env:
+          EMAIL: ${{ secrets.EMAIL }}
+          EMAIL_PSWD: ${{ secrets.EMAIL_PSWD }}
+          HR_EMAIL: ${{ secrets.HR_EMAIL }}
+          WORKFLOW_NAME: CI Pipeline
+        run: python3 script/send_email.py
