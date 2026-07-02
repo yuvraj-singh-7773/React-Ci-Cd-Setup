@@ -39,4 +39,8 @@ jobs:
 
       - name: Deploy to Vercel
         run: |
-          vercel deploy --prod --yes --token=${{ secrets.VERSEL_SECRET }}
+          vercel deploy \
+            --prod \
+            --yes \
+            --token=${{ secrets.VERSEL_SECRET }} \
+            --name react-ci-cd-setup
