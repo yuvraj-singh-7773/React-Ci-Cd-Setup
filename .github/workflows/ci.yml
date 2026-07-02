@@ -45,6 +45,14 @@ jobs:
 
       - name: Force failure
         run: exit 1
+
+      - name: Show current directory
+        run: pwd
+
+      - name: Show repository files
+        run: |
+          ls -la
+          find . -type f
       
       - name: Send failure email
         if: failure()
