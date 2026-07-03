@@ -14,6 +14,9 @@ jobs:
     environment: 
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -49,7 +52,7 @@ jobs:
 
       - name: fail
         run: exit 1
-        
+
       - name: Send failure email
         if: failure()
         env:
