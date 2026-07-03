@@ -43,10 +43,6 @@ jobs:
           name: build
           path: ./dist
 
-      - name: Force failure
-        run: exit 1
-
-      
       - name: Send failure email
         if: failure()
         env:
