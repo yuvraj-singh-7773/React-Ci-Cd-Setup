@@ -45,22 +45,6 @@ jobs:
           echo "Downloaded files:"
           ls -R dist
 
-      - name: Show repository files
-        run: |
-          pwd
-          ls -R
-
-      - name: fail
-        run: exit 1
-
-      - name: Send failure email
-        if: failure()
-        env:
-          EMAIL: ${{ secrets.EMAIL }}
-          EMAIL_PSWD: ${{ secrets.EMAIL_PSWD }}
-          HR_EMAIL: ${{ secrets.HR_EMAIL }}
-          WORKFLOW_NAME: CI Pipeline
-        run: python3 ./send_email.py
 
       - name: Deploy to Vercel
         run: |
@@ -81,5 +65,5 @@ jobs:
           EMAIL: ${{ secrets.EMAIL }}
           EMAIL_PSWD: ${{ secrets.EMAIL_PSWD }}
           HR_EMAIL: ${{ secrets.HR_EMAIL }}
-          WORKFLOW_NAME: CI Pipeline
+          WORKFLOW_NAME: CD Pipeline
         run: python3 ./send_email.py
