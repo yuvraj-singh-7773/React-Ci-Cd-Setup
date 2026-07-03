@@ -54,5 +54,5 @@ jobs:
           EMAIL_PSWD: ${{ secrets.EMAIL_PSWD }}
           HR_EMAIL: ${{ secrets.HR_EMAIL }}
           WORKFLOW_NAME: CI Pipeline
-        run: python3 send_email.py
+        run: python3 ./send_email.py
 
