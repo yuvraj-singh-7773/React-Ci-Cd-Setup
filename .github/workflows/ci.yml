@@ -46,13 +46,6 @@ jobs:
       - name: Force failure
         run: exit 1
 
-      - name: Show current directory
-        run: pwd
-
-      - name: Show repository files
-        run: |
-          ls -la
-          find . -type f
       
       - name: Send failure email
         if: failure()
@@ -61,5 +54,5 @@ jobs:
           EMAIL_PSWD: ${{ secrets.EMAIL_PSWD }}
           HR_EMAIL: ${{ secrets.HR_EMAIL }}
           WORKFLOW_NAME: CI Pipeline
-        run: python3 script/send_email.py
+        run: python3 send_email.py
 
