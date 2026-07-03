@@ -47,7 +47,7 @@ jobs:
           vercel deploy \
             --prod \
             --yes \
-            --token=${{ secrets.VERSEL_SECRET }} \
+            --token=${{ secrets.VERCEL_TOKEN}} \
             --name react-ci-cd-setup
       
       - name: Send failure email
